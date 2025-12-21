@@ -1,0 +1,34 @@
+"""
+グラフ（有向グラフ）・・・解けた
+隣接行列
+"""
+
+N,Q=map(int, input().split())
+graph=[[False]*N for _ in range(N)] 
+
+for _ in range(Q):
+    S=list(map(int, input().split()))
+    a=S[1]-1
+    if S[0]==1:
+        b=S[2]-1
+        graph[a][b]=True
+    elif S[0]==2:
+        for v in range(N):
+            if graph[v][a]:
+                graph[a][v]=True
+    else:
+        to_follow=[]
+        for v in range(N):
+            if graph[a][v]:
+                for w in range(N):
+                    if graph[v][w] and w!=a:
+                        to_follow.append(w)
+        for w in to_follow:
+            graph[a][w]=True
+
+# フォロー状況チェック
+for i in range(N):
+    ans=""
+    for j in range(N):
+        ans+=("Y" if  graph[i][j] else "N")
+    print(ans)
