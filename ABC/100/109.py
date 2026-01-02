@@ -1,3 +1,6 @@
+"""
+B問題_Shiritori
+"""
 w_lst = []
 n = int(input())
 for _ in range(n):

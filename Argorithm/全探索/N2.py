@@ -274,3 +274,24 @@ for l in range(N): # 0..N(0,1,2,3,N-1)
        ans += 1
 
 print(ans)
+
+
+"""
+JOI_D - 箱と鍵 (Boxes and Keys)
+"""
+
+from collections import defaultdict
+
+n,m = map(int, input().split())
+a = list(map(int, input().split()))
+b = set(map(int, input().split()))
+box = defaultdict(int)
+
+for a_i in a:
+  box[a_i] += 1
+
+ans = 0
+for b_i in b:
+  ans += box[b_i]
+
+print(ans)
