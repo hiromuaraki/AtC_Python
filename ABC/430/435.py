@@ -9,7 +9,7 @@ print(N * (N + 1) // 2)
 
 
 """
-B問題_No-Divisible Range・・・解けない
+B問題_No-Divisible Range
 難易度5Q
 (https://atcoder.jp/contests/abc435/tasks/abc435_b)
 難しい
@@ -38,6 +38,29 @@ for l in range(N): # 0..N(0,1,2,3,N-1)
        ans += 1
 
 print(ans)
+
+"""
+B問題_No-Divisible Range
+
+区間和＋全探索
+(https://atcoder.jp/contests/abc435/tasks/abc435_b)
+"""
+
+n = int(input())
+a = list(map(int, input().split()))
+
+count = 0
+for l in range(n - 1):
+  total = a[l]
+  dist = []
+  for r in range(l + 1, n):
+    dist = a[l : r + 1]
+    total += a[r]
+    if all(total % a_i != 0 for a_i in dist):
+      count += 1
+print(count)
+
+
 
 
 """
