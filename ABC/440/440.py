@@ -11,6 +11,7 @@ print(x << y)
 
 """
 B問題_Trifecta
+難易度5Q 少し頭使う
 (https://atcoder.jp/contests/abc440/tasks/abc440_b)
 """
 

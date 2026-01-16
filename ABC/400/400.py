@@ -12,9 +12,9 @@ B問題_Sum of Geometric Series・・・・解けた
 問題文をちゃんと読む
 """
 
-N,M = map(int, input().split())
+n,m = map(int, input().split())
 INF = 10**9
-x = 0
-for i in range(M + 1):
-  x += N**i
+x = 1
+for i in range(1, m + 1):
+  x += n**i
 print(x if x <= INF else "inf")

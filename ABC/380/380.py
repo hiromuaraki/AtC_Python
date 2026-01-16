@@ -19,7 +19,6 @@ B問題_Hurdle Parsing・・・解けた
 難易度27
 """
 
-S = input().split("|")
-for s in S:
-  if s != "":
-    print(len(s), end=" ")
+s = input().split("|")
+lst = [len(s_i) for s_i in s if s_i != '']
+print(*lst)
