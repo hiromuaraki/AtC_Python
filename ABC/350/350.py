@@ -22,12 +22,13 @@ XORで1→０ 0→1で反転させるのもありか
 
 # XOR０と１反転解法
 
-N,Q = map(int, input().split())
-T = list(map(int, input().split()))
-d = [1] * max(T)
-for t in T:
-  d[t - 1] ^= 1
-print(N - d.count(0))
+
+n,q = map(int, input().split())
+t = list(map(int, input().split()))
+dental = [1] * n
+for t_i in t:
+  dental[t_i - 1] ^= 1
+print(sum(dental))
 
 N,Q = map(int, input().split())
 T = list(map(int, input().split()))
