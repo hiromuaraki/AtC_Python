@@ -319,3 +319,28 @@ for i in range(30):
         lst.append(i)
 print(count)
 print(*lst)
+
+
+"""
+難易度6Q
+左シフト：*2
+右シフト：/2
+"""
+
+
+x = int(input())
+b = f"{x:b}"
+digit = "0" * (32 - len(b))
+bit = digit + b
+# XOR 反転
+xor = "".join(str(int(b_i) ^ 1) for b_i in bit)
+
+# 左右シフトは整数として計算して文字列化
+MASK_32 = (1 << 32) - 1  # 32ビット全1マスク
+left_shift = bin((x << 1) & MASK_32)[2:].zfill(32)
+right_shift = bin(x >> 1)[2:].zfill(32)
+
+print(bit)
+print(xor)
+print(left_shift)
+print(right_shift)
