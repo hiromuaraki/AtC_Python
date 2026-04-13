@@ -285,10 +285,56 @@ dp[i] = マスiに到達するまでの最小コスト
 階段の登り方
 """
 
-n = int(input())
-dp = [0] * (n + 1)
-dp[0], dp[1] = 1, 1
+# n = int(input())
+# dp = [0] * (n + 1)
+# dp[0], dp[1] = 1, 1
 
-for i in range(2, n + 1):
-  dp[i] = dp[i - 1] + dp[i - 2]
-print(dp[n])
+# for i in range(2, n + 1):
+#   dp[i] = dp[i - 1] + dp[i - 2]
+# print(dp[n])
+
+"""
+部分和問題のDP
+N個の整数の中からいくつかを選んでXを作ることはできるか？
+
+dp[j] = 「これまで見た要素の中からいくつか選んで、jを作れるか」
+"""
+
+# import sys
+# sys.setrecursionlimit(10**6)
+
+# # 先頭から i 個の要素を使って、合計 j を作れるか？
+# # メモ化再帰
+# def func(i ,j) -> int:
+#   # 過去に計算済みの場合メモに記録された値を返す
+#   if memo[i][j] != -1: return memo[i][j]
+  
+#   if i == 0:
+#     memo[i][j] = j == 0
+#   else:
+#     memo[i][j] = 0
+#     if j >= a[i - 1] and func(i - 1, j - a[i - 1]) == 1:
+#       memo[i][j] = 1
+#     if func(i - 1, j) == 1:
+#       memo[i][j] = 1
+#   return memo[i][j]
+
+# n,x = map(int, input().split())
+# a = list(map(int, input().split()))
+# # func(i, j) の値を記録するメモ(配列)を用意する
+# # -1 なら未記録、0 なら false、1 なら true
+# memo = [[-1] * (x + 1) for _ in range(n + 1)]
+# print("Yes" if func(n, x) == 1 else "No")
+
+# DFS解法
+def dfs(l, path):
+  if len(path) == N:
+    print(*path)
+    return
+  for i in range(l, R+1):
+    path.append(i)
+    dfs(i, path)
+    path.pop()
+
+N, L, R = map(int, input().split())
+dfs(L, [])
