@@ -327,14 +327,56 @@ dp[j] = 「これまで見た要素の中からいくつか選んで、jを作�
 # print("Yes" if func(n, x) == 1 else "No")
 
 # DFS解法
-def dfs(l, path):
-  if len(path) == N:
-    print(*path)
-    return
-  for i in range(l, R+1):
-    path.append(i)
-    dfs(i, path)
-    path.pop()
+# def dfs(l, path):
+#   if len(path) == N:
+#     print(*path)
+#     return
+#   for i in range(l, R+1):
+#     path.append(i)
+#     dfs(i, path)
+#     path.pop()
 
-N, L, R = map(int, input().split())
-dfs(L, [])
+# N, L, R = map(int, input().split())
+# dfs(L, [])
+
+"""
+頂点を塗る
+
+色が塗られる＝訪問ずみ
+色が塗られていない＝未訪問
+-1：未訪問/ -1以外：訪問済み
+
+k回頂点の色塗る。
+k回の操作によって色が塗られた頂点を番号が小さい順にN行で出力
+"""
+N,M = map(int, input().split())
+G = [[] for _ in range(N)] # 隣接リストを作成[[]]（単純無向グラフ）
+dist = [-1] * N # 何手目で頂点を訪れたかを管理する配列
+for _ in range(M):
+    A,B = map(int, input().split())
+    G[A].append(B) # 頂点Aに頂点Bの辺を張る
+    G[B].append(A) # 頂点Bに頂点Aの辺を張る
+
+from collections import deque
+
+# BFS開始
+todo = deque([0])  # 頂点の訪問を管理するtodoリスト
+dist[0] = 0 # 頂点0に0手目で訪問できる
+nodes = [[] for _ in range(N)] # 色を塗った頂点番号を管理する配列
+nodes[0].append(0)
+# 未訪問の頂点がなくなるまで繰り返す
+while todo:
+    v = todo.popleft()
+    for nv in G[v]:
+        if dist[nv] != -1:
+            continue
+        dist[nv] = dist[v] + 1 # 頂点nvには距離v＋１で到達できる
+        nodes[dist[nv]].append(nv) # nv手目で訪れた頂点番号を記録
+        todo.append(nv) # 次に訪問する頂点を追加
+
+for k in range(N):
+    nodes[k].sort()
+    print(*nodes[k])
+    
+
+
