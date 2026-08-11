@@ -1004,20 +1004,59 @@ jを作れる最小個数（１次元）
 直前の列の塗り方を持たせる
 """
 
+# N = int(input())
+# A = list(map(int, input().split()))
+# B = list(map(int, input().split()))
+# INF = 10**9
+# dp = [[INF] * 4 for _ in range(N)]
+
+# dp[0][1] = A[0] # 上だけ黒 
+# dp[0][2] = B[0] # 下だけ黒
+# dp[0][3] = A[0] + B[0] # 上下黒
+
+# for i in range(1, N):
+#     dp[i][1] = min(dp[i - 1][1], dp[i - 1][3]) + A[i]
+#     dp[i][2] = min(dp[i - 1][2], dp[i - 1][3]) + B[i]
+#     dp[i][3] = min(dp[i - 1][1], dp[i - 1][2], dp[i - 1][3]) + A[i] + B[i]
+
+# print(min(dp[N  -1]))
+
+
+"""
+アナグラムになる確率
+(https://algo-method.com/tasks/869)
+
+数え上げ
+分子（アナグラムのペアになる数）：k * (k - 1) // 2
+分母（総パターン数）：N * (N - 1) // 2
+
+"""
+
+from collections import Counter
+
 N = int(input())
-A = list(map(int, input().split()))
-B = list(map(int, input().split()))
-INF = 10**9
-dp = [[INF] * 4 for _ in range(N)]
+s = input().split()
+S = ["".join(sorted(s_i)) for s_i in s]
+# 同じ文字列ごとにグループ化
+counter = Counter(S)
 
-dp[0][1] = A[0] # 上だけ黒 
-dp[0][2] = B[0] # 下だけ黒
-dp[0][3] = A[0] + B[0] # 上下黒
+count = 0 # アナグラムになるペア数
+# 同じ文字列のグループの中から異なる文字列を2つ選ぶ
+for k in counter.values():
+    count += k * (k - 1) // 2
 
-for i in range(1, N):
-    dp[i][1] = min(dp[i - 1][1], dp[i - 1][3]) + A[i]
-    dp[i][2] = min(dp[i - 1][2], dp[i - 1][3]) + B[i]
-    dp[i][3] = min(dp[i - 1][1], dp[i - 1][2], dp[i - 1][3]) + A[i] + B[i]
+total = N * (N - 1) // 2
+print(f"{count / total :.13f}")
 
-print(min(dp[N  -1]))
-    
+
+
+
+
+
+
+        
+
+
+
+
+
